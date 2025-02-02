@@ -31,7 +31,8 @@ while True:
 
     frame = movement_data[frame_count]
     frame_count += 1
-    for point in frame[0:9]:
+    # analyze points on face and shoulder for movement
+    for point in frame[0:12]:
         if frame_count == 1:
             prev_x = point[0]
             prev_y = point[1]
@@ -46,6 +47,7 @@ while True:
             prev_x = x
             prev_y = y
     
+    # track instances of movement, if more than twice, send alert
     if restless_count > 2:
         print(f"Patient motion detected!!")
         restless_count = 0
